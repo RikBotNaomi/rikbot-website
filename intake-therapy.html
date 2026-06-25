@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RikBot — Client Intake Form</title>
+<meta name="description" content="RikBot client onboarding form for therapy practices. Help us understand your setup so we can build a workflow that fits exactly how your practice works.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FAFAF7;
+  --paper-warm: #F4F1EC;
+  --ink: #1A1612;
+  --ink-soft: #4A4239;
+  --ink-muted: #7A6E63;
+  --mauve-dark: #6B4E55;
+  --mauve-mid: #B49398;
+  --mauve-light: #F0E3E6;
+  --highlight: #F4E4D4;
+  --rule: #E8E0DC;
+  --shadow: 0 1px 2px rgba(26, 22, 18, 0.04), 0 8px 24px -8px rgba(107, 78, 85, 0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Nav ===== */
+nav.top {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 250, 247, 0.92);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.nav-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.brand-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mauve-dark);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.nav-link:hover { color: var(--mauve-dark); }
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.15s ease;
+  letter-spacing: -0.005em;
+}
+
+.nav-cta:hover {
+  background: var(--mauve-dark);
+  transform: translateY(-1px);
+}
+
+.nav-cta::after {
+  content: "→";
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.nav-cta:hover::after { transform: translateX(3px); }
+
+/* ===== Hero ===== */
+.page-hero {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 32px 48px;
+  text-align: center;
+}
+
+.page-hero h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.page-hero h1 em {
+  font-style: normal;
+  color: var(--mauve-dark);
+}
+
+.page-hero p {
+  font-size: 17px;
+  color: var(--ink-soft);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ===== Form wrapper ===== */
+.form-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 32px 96px;
+}
+
+/* ===== Section blocks ===== */
+.form-section {
+  margin-bottom: 48px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--mauve-light);
+}
+
+.section-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--mauve-dark);
+  color: var(--paper);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--mauve-dark);
+}
+
+/* ===== Field groups ===== */
+.field-group {
+  margin-bottom: 28px;
+}
+
+.field-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.field-hint {
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin-bottom: 8px;
+  font-style: italic;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--mauve-mid);
+  box-shadow: 0 0 0 3px rgba(107, 78, 85, 0.08);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ===== Checkbox groups ===== */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--mauve-mid);
+  border-radius: 4px;
+  cursor: pointer;
+  accent-color: var(--mauve-dark);
+  flex-shrink: 0;
+}
+
+/* ===== Radio groups ===== */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.radio-item input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--mauve-mid);
+  cursor: pointer;
+  accent-color: var(--mauve-dark);
+  flex-shrink: 0;
+}
+
+/* ===== Two column layout ===== */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ===== Notice box ===== */
+.notice {
+  background: var(--mauve-light);
+  border-left: 3px solid var(--mauve-dark);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  margin-bottom: 32px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* ===== Submit button ===== */
+.submit-wrap {
+  margin-top: 48px;
+  text-align: center;
+}
+
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+  letter-spacing: -0.01em;
+}
+
+.submit-btn:hover {
+  background: var(--mauve-dark);
+  transform: translateY(-1px);
+}
+
+.submit-btn::after {
+  content: "→";
+  transition: transform 0.2s ease;
+}
+
+.submit-btn:hover::after { transform: translateX(3px); }
+
+.submit-note {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+/* ===== Footer ===== */
+footer {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+footer .signoff { font-weight: 500; color: var(--ink-soft); }
+
+footer a {
+  color: var(--ink-muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+footer a:hover {
+  color: var(--mauve-dark);
+  border-color: var(--mauve-mid);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .nav-inner { padding: 16px 20px; }
+  .page-hero { padding: 48px 20px 32px; }
+  .form-wrap { padding: 0 20px 64px; }
+  .two-col { grid-template-columns: 1fr; }
+  footer { padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="nav-inner">
+    <a href="index.html" class="brand"><span class="brand-dot"></span> RikBot</a>
+    <div class="nav-links">
+      <a href="about.html" class="nav-link">About</a>
+      <a href="https://cal.com/rikbot/discovery" class="nav-cta">Book a call</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1>Client Intake <em>Form</em></h1>
+  <p>Thank you for moving forward with RikBot. This form helps me understand your current setup so I can build a workflow that fits exactly how your practice works. Takes about 10 minutes.</p>
+</div>
+
+<div class="form-wrap">
+
+  <div class="notice">
+    Once I receive this form I will be in touch within 24 hours to confirm scope and next steps. If you have questions before then, reach me at <a href="mailto:naomi@rikbot.com">naomi@rikbot.com</a>.
+  </div>
+
+  <form action="https://formspree.io/f/mvzjkvep" method="POST">
+    <input type="hidden" name="_next" value="https://cal.com/rikbot/discovery">
+
+    <!-- SECTION 1 -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">1</span>
+        <span class="section-title">Your Practice</span>
+      </div>
+
+      <div class="two-col">
+        <div class="field-group">
+          <label class="field-label" for="practice-name">Practice name</label>
+          <p class="field-hint">As it appears on your website or Psychology Today profile</p>
+          <input type="text" id="practice-name" name="practice_name" placeholder="e.g. Westside Therapy Group">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="your-name">Your name and role</label>
+          <p class="field-hint">Your full name and title</p>
+          <input type="text" id="your-name" name="your_name" placeholder="e.g. Dr. Jane Smith, Owner">
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="field-group">
+          <label class="field-label" for="notif-email">Notification email</label>
+          <p class="field-hint">Where workflow alerts will be sent</p>
+          <input type="email" id="notif-email" name="notification_email" placeholder="you@yourpractice.com">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="sms-phone">Phone for SMS (optional)</label>
+          <p class="field-hint">Leave blank if email only is fine</p>
+          <input type="tel" id="sms-phone" name="sms_phone" placeholder="+1 (555) 000-0000">
+        </div>
+      </div>
+
+      <div class="field-group" style="max-width: 220px;">
+        <label class="field-label" for="therapist-count">How many therapists in your practice?</label>
+        <p class="field-hint">Including yourself</p>
+        <input type="text" id="therapist-count" name="therapist_count" placeholder="e.g. 1, 3, 8">
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">2</span>
+        <span class="section-title">Your Current Intake Setup</span>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Where do new client inquiries currently come from?</label>
+        <p class="field-hint">Check all that apply</p>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" name="inquiry_source" value="Psychology Today"> Psychology Today profile</label>
+          <label class="checkbox-item"><input type="checkbox" name="inquiry_source" value="Own website form"> My own website form</label>
+          <label class="checkbox-item"><input type="checkbox" name="inquiry_source" value="Google Form"> Google Form</label>
+          <label class="checkbox-item"><input type="checkbox" name="inquiry_source" value="JotForm or Typeform"> JotForm or Typeform</label>
+          <label class="checkbox-item"><input type="checkbox" name="inquiry_source" value="Email directly"> Email directly</label>
+          <label class="checkbox-item"><input type="checkbox" name="inquiry_source" value="Other"> Other</label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="inquiry-other">If other, please describe</label>
+        <input type="text" id="inquiry-other" name="inquiry_source_other" placeholder="">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Where do intake submissions currently land?</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" name="inbox_type" value="Gmail"> Gmail</label>
+          <label class="checkbox-item"><input type="checkbox" name="inbox_type" value="Outlook"> Outlook</label>
+          <label class="checkbox-item"><input type="checkbox" name="inbox_type" value="Zoho Mail"> Zoho Mail</label>
+          <label class="checkbox-item"><input type="checkbox" name="inbox_type" value="EHR portal inbox"> EHR portal inbox</label>
+          <label class="checkbox-item"><input type="checkbox" name="inbox_type" value="Other"> Other</label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="intake-email">Email address where intakes currently arrive</label>
+        <input type="email" id="intake-email" name="intake_email" placeholder="e.g. yourname@gmail.com">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Do you currently use an EHR or practice management system?</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="ehr" value="None"> No, not yet</label>
+          <label class="radio-item"><input type="radio" name="ehr" value="SimplePractice"> SimplePractice</label>
+          <label class="radio-item"><input type="radio" name="ehr" value="TherapyNotes"> TherapyNotes</label>
+          <label class="radio-item"><input type="radio" name="ehr" value="TheraNest"> TheraNest</label>
+          <label class="radio-item"><input type="radio" name="ehr" value="Other"> Other</label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="ehr-detail">If yes, which one and how long have you been using it?</label>
+        <input type="text" id="ehr-detail" name="ehr_detail" placeholder="">
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">3</span>
+        <span class="section-title">Your Intake Form Fields</span>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="form-fields">What information does your current intake form collect?</label>
+        <p class="field-hint">List all fields: e.g. name, phone, email, reason for seeking therapy, insurance, availability</p>
+        <textarea id="form-fields" name="form_fields" rows="4" placeholder="e.g. Name, email, phone number, reason for seeking therapy, current medications, insurance provider..."></textarea>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="urgency-fields">Are there any fields that could indicate urgency or crisis?</label>
+        <p class="field-hint">e.g. a free-text reason field, or a question like "Are you having thoughts of self-harm?"</p>
+        <textarea id="urgency-fields" name="urgency_fields" rows="3" placeholder="e.g. There is a free-text field asking 'What brings you to therapy?' where someone might express distress..."></textarea>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="crisis-language">What specific language should trigger an immediate crisis flag?</label>
+        <p class="field-hint">Be as specific as you like. This is what the system will watch for.</p>
+        <textarea id="crisis-language" name="crisis_language" rows="4" placeholder="e.g. 'no way out', 'feeling hopeless', 'want to hurt myself', 'suicidal', 'end my life'..."></textarea>
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">4</span>
+        <span class="section-title">Routing Preferences</span>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">When a standard intake comes in, who should be notified?</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="standard_routing" value="Just me"> Just me</label>
+          <label class="radio-item"><input type="radio" name="standard_routing" value="Me and one other"> Me and one other person</label>
+          <label class="radio-item"><input type="radio" name="standard_routing" value="Multiple by specialty"> Multiple therapists based on specialty</label>
+          <label class="radio-item"><input type="radio" name="standard_routing" value="Not sure"> Not sure, let's discuss</label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="routing-criteria">If routing to multiple therapists, what criteria should determine who gets it?</label>
+        <p class="field-hint">e.g. specialty (anxiety vs trauma), availability, caseload, insurance accepted</p>
+        <textarea id="routing-criteria" name="routing_criteria" rows="3" placeholder=""></textarea>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="therapist-list">List each therapist's name, specialty, and notification email or phone</label>
+        <p class="field-hint">e.g. Dr. Kim, trauma, kim@practice.com</p>
+        <textarea id="therapist-list" name="therapist_list" rows="4" placeholder=""></textarea>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">When a crisis intake comes in, who should be notified immediately?</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="crisis_routing" value="Just me"> Just me</label>
+          <label class="radio-item"><input type="radio" name="crisis_routing" value="Me and one other"> Me and one other person</label>
+          <label class="radio-item"><input type="radio" name="crisis_routing" value="All therapists"> All therapists</label>
+          <label class="radio-item"><input type="radio" name="crisis_routing" value="On-call contact"> A dedicated on-call contact</label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="crisis-contact">Crisis notification contact name and email or phone</label>
+        <input type="text" id="crisis-contact" name="crisis_contact" placeholder="e.g. Dr. Smith, smith@practice.com, (555) 000-0000">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">How would you like to be notified?</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="notification_method" value="Email only"> Email only</label>
+          <label class="radio-item"><input type="radio" name="notification_method" value="SMS only"> SMS only</label>
+          <label class="radio-item"><input type="radio" name="notification_method" value="Both"> Both email and SMS</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">5</span>
+        <span class="section-title">Automated Response (Optional)</span>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Would you like the system to send an automatic acknowledgment email to new clients?</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="auto_response" value="Yes"> Yes</label>
+          <label class="radio-item"><input type="radio" name="auto_response" value="No"> No</label>
+          <label class="radio-item"><input type="radio" name="auto_response" value="Not sure"> Not sure, let's discuss</label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="auto-response-text">If yes, what should that acknowledgment say?</label>
+        <p class="field-hint">Write your preferred message or leave blank and I will draft something for your review</p>
+        <textarea id="auto-response-text" name="auto_response_text" rows="4" placeholder="e.g. Thank you for reaching out to [Practice Name]. We have received your inquiry and will be in touch within one business day..."></textarea>
+      </div>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">6</span>
+        <span class="section-title">Access and Technical</span>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Are you comfortable granting read access to the inbox where intakes land?</label>
+        <p class="field-hint">This is how the workflow reads incoming forms. I only request read permissions, never send or delete access.</p>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="inbox_access" value="Yes"> Yes</label>
+          <label class="radio-item"><input type="radio" name="inbox_access" value="Need more info"> I need more information first</label>
+          <label class="radio-item"><input type="radio" name="inbox_access" value="Prefer different"> I would prefer a different approach</label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="other-tools">Any other tools or platforms I should know about?</label>
+        <p class="field-hint">Even if you are not sure it is relevant, list it here</p>
+        <textarea id="other-tools" name="other_tools" rows="3" placeholder="e.g. Calendly for scheduling, Slack for team communication, Dropbox for file storage..."></textarea>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="complications">Anything about your current setup that feels complicated or unusual?</label>
+        <p class="field-hint">No wrong answers here</p>
+        <textarea id="complications" name="complications" rows="3" placeholder=""></textarea>
+      </div>
+    </div>
+
+    <!-- SECTION 7 -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">7</span>
+        <span class="section-title">Timeline and Logistics</span>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">When would you ideally like the workflow live?</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="timeline" value="ASAP"> As soon as possible</label>
+          <label class="radio-item"><input type="radio" name="timeline" value="2 weeks"> Within 2 weeks</label>
+          <label class="radio-item"><input type="radio" name="timeline" value="1 month"> Within a month</label>
+          <label class="radio-item"><input type="radio" name="timeline" value="Flexible"> Flexible</label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="timing-notes">Any dates or events to be aware of?</label>
+        <p class="field-hint">e.g. a staff change, website update, or busy period coming up</p>
+        <input type="text" id="timing-notes" name="timing_notes" placeholder="">
+      </div>
+
+      <div class="two-col">
+        <div class="field-group">
+          <label class="field-label">Preferred invoice method</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="invoice_method" value="PayPal"> PayPal</label>
+            <label class="radio-item"><input type="radio" name="invoice_method" value="Venmo"> Venmo</label>
+            <label class="radio-item"><input type="radio" name="invoice_method" value="Bank transfer"> Bank transfer</label>
+            <label class="radio-item"><input type="radio" name="invoice_method" value="Check"> Check</label>
+            <label class="radio-item"><input type="radio" name="invoice_method" value="Other"> Other</label>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="legal-name">Legal name for invoice</label>
+          <p class="field-hint">As it should appear on the invoice</p>
+          <input type="text" id="legal-name" name="legal_name" placeholder="">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="questions">Any questions or concerns before we get started?</label>
+        <textarea id="questions" name="questions" rows="4" placeholder="Anything at all, no question is too small..."></textarea>
+      </div>
+    </div>
+
+    <div class="submit-wrap">
+      <button type="submit" class="submit-btn">Submit intake form</button>
+      <p class="submit-note">I will follow up within 24 hours at the email you provided above.</p>
+    </div>
+
+  </form>
+</div>
+
+<footer>
+  <span class="signoff">— Naomi, RikBot</span>
+  <span><a href="mailto:naomi@rikbot.com">naomi@rikbot.com</a> · <a href="https://cal.com/rikbot/discovery">cal.com/rikbot/discovery</a></span>
+</footer>
+
+</body>
+</html>
